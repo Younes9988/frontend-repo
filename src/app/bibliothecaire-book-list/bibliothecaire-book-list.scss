@@ -1,0 +1,126 @@
+.page-content {
+  margin-left: 230px;          /* pushes away from sidebar */
+  height: 100vh;               /* full height */
+  overflow-y: auto;            /* enables scrolling */
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.books-page {
+  padding: 20px 40px;
+  padding-top: 90px;           /* space under navbar */
+}
+
+/* Header Section */
+.books-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* pushes left group and right button apart */
+  margin-bottom: 25px;
+}
+
+.left-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+/* Add Book Button */
+.add-book-btn {
+  background: #387dad;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.add-book-btn:hover {
+  background: #236fa0;
+}
+
+/* Search box */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #d8e2eb;
+  padding: 8px 12px;
+  border-radius: 5px;
+  width: 260px;
+}
+
+.search-box i {
+  font-size: 14px;
+  margin-right: 8px;
+  color: #7a8a99;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  background: transparent;
+}
+
+/* Filter Button */
+.filter-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #387dad;
+  padding: 8px 14px;
+  border: 1px solid #d8e2eb;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  color:#fff;
+}
+
+.filter-box .chevron {
+  margin-left: 6px;
+}
+
+/* Books Grid */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+/* Book Card */
+.book-card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+}
+
+.book-card img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.book-info {
+  margin-top: 10px;
+}
+
+.book-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.book-info .author {
+  margin-top: -2px;
+  font-size: 12px;
+  color: #6b7b8c;
+}

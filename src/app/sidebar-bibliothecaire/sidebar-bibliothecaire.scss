@@ -1,0 +1,128 @@
+.sidebar {
+  width: 230px;
+  height: 100vh;
+  background: linear-gradient(180deg, #7a9dad 0%, #b8d4de 100%);
+  border-top-right-radius: 70px;
+  border-bottom-right-radius: 70px;
+ 
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+  position: fixed;   /* <-- Keeps sidebar on the left */
+  top: 0;
+  left: 0;
+  z-index: 100;   
+}
+
+/* Logo section */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+
+  img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .text .main {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a2f3f;
+    line-height: 1.2;
+  }
+
+  .text .sub {
+    font-size: 11px;
+    color: #2c4a5a;
+    opacity: 0.85;
+    line-height: 1.2;
+  }
+}
+
+/* MENU - fills available space */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1; /* Takes all available space */
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #1a3a4a;
+  position: relative;
+  transition: all 0.2s ease;
+  text-decoration: none;
+
+  i {
+    font-size: 17px;
+    width: 20px;
+    text-align: center;
+    color: #2c4a5a;
+  }
+
+  &:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+/* ACTIVE ITEM STYLE */
+.menu-item.active {
+  background: #d4e8f0;
+  font-weight: 600;
+  color: #0a2f3f;
+
+  i {
+    color: #1a3a4a;
+  }
+}
+
+/* LEFT BLUE HIGHLIGHT BAR */
+.menu-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 100%;
+  background: #2980b9;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Remove the separate highlight div - using ::before instead */
+.left-highlight {
+  display: none;
+}
+
+/* Bottom area - no margin-top auto */
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 80px; /* Remove auto margin */
+}
+
+.logout {
+  color: #1a5c8a;
+  font-weight: 500;
+
+  i {
+    color: #1a5c8a;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}

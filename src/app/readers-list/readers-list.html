@@ -1,0 +1,91 @@
+<app-sidebar-bibliothecaire></app-sidebar-bibliothecaire>
+
+<div class="page-content">
+    <app-navbar></app-navbar>
+
+    <div class="scroll-container">
+
+        <div class="users-page">
+
+            <div class="top-bar">
+
+                <h2>Users</h2>
+
+                <div class="right-controls">
+
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search users..." />
+                    </div>
+
+                    <!-- Filter by Role -->
+                    <div class="filter-box">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>Filter Role</span>
+                        <i class="fa-solid fa-chevron-down chevron"></i>
+                    </div>
+
+                    <!-- Add User Button -->
+                    <button class="add-user-btn" (click)="goToAddUser()">
+                        <i class="fa-solid fa-plus"></i> Add User
+                    </button>
+
+                </div>
+            </div>
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                        <th>Date Joined</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>john.doe@gmail.com</td>
+                        <td>0655443322</td>
+                        <td>Reader</td>
+                        <td>08/07/2025</td>
+                        <td><span class="active">Active</span></td>
+                        <td>
+                            <button class="details-btn" (click)="goToDetails()">Details</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Sarah Smith</td>
+                        <td>sarah.smith@gmail.com</td>
+                        <td>0661122334</td>
+                        <td>Librarian</td>
+                        <td>05/03/2025</td>
+                        <td><span class="inactive">Inactive</span></td>
+                        <td>
+                            <button class="details-btn" (click)="goToDetails()">Details</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Adam Johnson</td>
+                        <td>adam.johnson@gmail.com</td>
+                        <td>0677889922</td>
+                        <td>Admin</td>
+                        <td>12/11/2024</td>
+                        <td><span class="active">Active</span></td>
+                        <td>
+                            <button class="details-btn" (click)="goToDetails()">Details</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>

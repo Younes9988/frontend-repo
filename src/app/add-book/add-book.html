@@ -1,0 +1,64 @@
+<app-sidebar-bibliothecaire></app-sidebar-bibliothecaire>
+<div class="page-content">
+    <app-navbar></app-navbar>
+    <div class="scroll-container">
+        <!-- Books Page Layout -->
+        <div class="books-page">
+            <div class="add-title-container">
+                <h2>Add a new Title</h2>
+
+                <form class="add-book-form">
+
+                    <!-- LEFT COLUMN -->
+                    <div class="form-left">
+
+                        <label>Title*</label>
+                        <input type="text" placeholder="Enter Title">
+
+                        <label>Author*</label>
+                        <input type="text" placeholder="Enter The Author's Name">
+
+                        <label>ISBN*</label>
+                        <input type="text" placeholder="Enter ISBN">
+
+                        <label>Book Cover Image*</label>
+                        <div class="upload-box">
+                            <p>Drag and drop files here, or click to browse</p>
+                            <button type="button">Browse Files</button>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT COLUMN -->
+                    <div class="form-right">
+
+                        <label>Category*</label>
+                        <select>
+                            <option>Select</option>
+                            <option>Novel</option>
+                            <option>Science</option>
+                            <option>History</option>
+                        </select>
+
+                        <label>Number Of Copies*</label>
+                        <input type="number" placeholder="Enter The Number Of Copies">
+
+                        <label>Acquisition Date*</label>
+                        <input type="date">
+
+                        <label>Description*</label>
+                        <textarea placeholder="Write a description..."></textarea>
+
+                    </div>
+
+                </form>
+
+                <!-- BUTTONS -->
+                <div class="actions">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="add-btn">Add The Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

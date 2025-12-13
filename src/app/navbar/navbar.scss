@@ -1,0 +1,100 @@
+/* NAVBAR */
+.navbar {
+  height: 70px;
+  width: calc(100% - 230px); /* subtract sidebar width */
+  position: fixed;
+  top: 0;
+  left: 230px;               /* shift after sidebar */
+  z-index: 200;
+
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+  border-bottom: 1px solid #e5e9ec;
+  box-sizing: border-box;
+}
+
+/* LEFT SIDE */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 42px;
+}
+
+.nav-text .title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nav-text .subtitle {
+  font-size: 10px;
+  margin-top: -2px;
+  opacity: 0.6;
+}
+
+/* RIGHT SIDE */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* Notifications */
+.notif {
+  position: relative;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.notif i {
+  color: #333;
+}
+
+.notif-dot {
+  position: absolute;
+  right: -2px;
+  top: -2px;
+
+  width: 8px;
+  height: 8px;
+  background: #ff4971;
+  border-radius: 50%;
+}
+
+/* Profile Section */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-icon {
+  font-size: 42px;
+  color: #4b6b7c;
+}
+
+.profile-text .name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.profile-text .email {
+  font-size: 11px;
+  color: gray;
+  margin-top: -2px;
+}

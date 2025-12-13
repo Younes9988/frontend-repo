@@ -1,0 +1,42 @@
+<app-sidebar-bibliothecaire></app-sidebar-bibliothecaire>
+<div class="page-content">
+  <app-navbar></app-navbar>
+  <div class="scroll-container">
+    <!-- Books Page Layout -->
+    <div class="books-page">
+
+      <!-- Top Bar -->
+      <div class="books-header">
+
+        <!-- LEFT SIDE -->
+        <div class="left-controls">
+
+          <button class="add-book-btn" (click)="goToAddBook()">
+            <i class="fa-solid fa-plus"></i> Add A Book
+          </button>
+        </div>
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search..." />
+        </div>
+        <div class="filter-box">
+          <i class="fa-solid fa-filter"></i>
+          <span>Filter By Category</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </div>
+      </div>
+
+      <!-- Books Grid -->
+      <div class="books-grid">
+        <div class="book-card" *ngFor="let x of [1,2,3,4,5,6,7,8]" (click)="goToDetails()">
+          <img src="assets/images/bookcover.webp" />
+          <div class="book-info">
+            <h4>THE HOBBIT</h4>
+            <p class="author">By Tony Lace</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
