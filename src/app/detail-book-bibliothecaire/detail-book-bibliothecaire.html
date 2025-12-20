@@ -1,6 +1,8 @@
 <div class="books-page">
 
-  <div class="book-details-container" *ngIf="livre">
+
+  <!-- DETAILS -->
+  <div class="book-details-container" *ngIf="!loading && livre">
 
     <!-- Header -->
     <div class="header">
@@ -8,51 +10,29 @@
 
       <div class="action-buttons">
 
-       <!-- Normal mode -->
-<ng-container *ngIf="!edit">
-  <button
-    type="button"
-    class="delete-btn"
-    (click)="onDelete()"
-    [disabled]="saving"
-  >
-    <i class="fa-solid fa-trash"></i> Delete
-  </button>
+        <!-- Normal mode -->
+        <ng-container *ngIf="!edit">
+          <button class="delete-btn" (click)="onDelete()" [disabled]="saving">
+            <i class="fa-solid fa-trash"></i> Delete
+          </button>
 
-  <button
-    type="button"
-    class="update-btn"
-    (click)="enableEdit()"
-    [disabled]="saving"
-  >
-    <i class="fa-solid fa-pen"></i> Update
-  </button>
-</ng-container>
+          <button class="update-btn" (click)="enableEdit()" [disabled]="saving">
+            <i class="fa-solid fa-pen"></i> Update
+          </button>
+        </ng-container>
 
-<!-- Edit mode -->
-<ng-container *ngIf="edit">
-  <button
-    type="button"
-    class="update-btn"
-    (click)="saveEdit()"
-    [disabled]="saving"
-  >
-    <i class="fa-solid fa-check"></i> Save
-  </button>
+        <!-- Edit mode -->
+        <ng-container *ngIf="edit">
+          <button class="update-btn" (click)="saveEdit()" [disabled]="saving">
+            <i class="fa-solid fa-check"></i> Save
+          </button>
 
-  <button
-    type="button"
-    class="delete-btn"
-    (click)="cancelEdit()"
-    [disabled]="saving"
-  >
-    <i class="fa-solid fa-xmark"></i> Cancel
-  </button>
-</ng-container>
-
+          <button class="delete-btn" (click)="cancelEdit()" [disabled]="saving">
+            <i class="fa-solid fa-xmark"></i> Cancel
+          </button>
+        </ng-container>
 
       </div>
-
     </div>
 
     <!-- Content -->
@@ -104,18 +84,11 @@
 
         <div class="description-field">
           <label>Description</label>
-          <textarea rows="3" [(ngModel)]="form.description" [disabled]="!edit">
-    </textarea>
+          <textarea rows="3" [(ngModel)]="form.description" [disabled]="!edit"></textarea>
         </div>
 
       </div>
-
-
     </div>
-
   </div>
-
-  <!-- Optional loading -->
-  <p *ngIf="!livre">Loading book details...</p>
 
 </div>

@@ -1,0 +1,8 @@
+{
+  "/MSLIVRE": {
+    "target": "http://localhost:5050",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

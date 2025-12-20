@@ -11,8 +11,8 @@ import { AddReaders } from './add-readers/add-readers';
 
 export const routes: Routes = [
 
-  // 🔹 Login (NO layout)
-  { path: '', component: Login },
+  // 🔹 Login (ONLY exact root)
+  { path: '', component: Login, pathMatch: 'full' },
 
   // 🔹 Layout with sidebar + navbar
   {

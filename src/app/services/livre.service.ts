@@ -8,7 +8,7 @@ import { Livre } from '../models/livre.model';
 })
 export class LivreService {
 
-  private apiUrl = 'http://localhost:5050/MSLIVRE/api/livres';
+  private apiUrl = '/MSLIVRE/api/livres';
 
   private livresSubject = new BehaviorSubject<Livre[]>([]);
   livres$ = this.livresSubject.asObservable();
