@@ -1,31 +1,34 @@
-<app-sidebar-bibliothecaire></app-sidebar-bibliothecaire>
-<div class="page-content">
-    <app-navbar></app-navbar>
-    <div class="scroll-container">
+
         <!-- Books Page Layout -->
         <div class="books-page">
             <div class="add-title-container">
                 <h2>Add a new Title</h2>
-
-                <form class="add-book-form">
+                <form class="add-book-form" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
 
                     <!-- LEFT COLUMN -->
                     <div class="form-left">
 
                         <label>Title*</label>
-                        <input type="text" placeholder="Enter Title">
+                        <input type="text" formControlName="titre" placeholder="Enter Title">
 
                         <label>Author*</label>
-                        <input type="text" placeholder="Enter The Author's Name">
+                        <input type="text" formControlName="auteur" placeholder="Enter The Author's Name">
 
                         <label>ISBN*</label>
-                        <input type="text" placeholder="Enter ISBN">
+                        <input type="text" formControlName="isbn" placeholder="Enter ISBN">
 
                         <label>Book Cover Image*</label>
-                        <div class="upload-box">
-                            <p>Drag and drop files here, or click to browse</p>
-                            <button type="button">Browse Files</button>
+                        <div class="upload-box" (click)="fileInput.click()">
+                            <input type="file" hidden #fileInput (change)="onFileSelected($event)">
+
+                            <ng-container *ngIf="!imagePreview">
+                                <p>Drag and drop files here, or click to browse</p>
+                                <button type="button">Browse Files</button>
+                            </ng-container>
+
+                            <img *ngIf="imagePreview" [src]="imagePreview" class="preview-img">
                         </div>
+
 
                     </div>
 
@@ -33,21 +36,19 @@
                     <div class="form-right">
 
                         <label>Category*</label>
-                        <select>
-                            <option>Select</option>
-                            <option>Novel</option>
-                            <option>Science</option>
-                            <option>History</option>
+                        <select formControlName="category">
+                            <option value="">Select</option>
+                            <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
                         </select>
 
                         <label>Number Of Copies*</label>
-                        <input type="number" placeholder="Enter The Number Of Copies">
+                        <input type="number" formControlName="nombreCopies">
 
                         <label>Acquisition Date*</label>
-                        <input type="date">
+                        <input type="date" formControlName="dateAcquisition">
 
                         <label>Description*</label>
-                        <textarea placeholder="Write a description..."></textarea>
+                        <textarea formControlName="description"></textarea>
 
                     </div>
 
@@ -55,10 +56,8 @@
 
                 <!-- BUTTONS -->
                 <div class="actions">
-                    <button class="cancel-btn">Cancel</button>
-                    <button class="add-btn">Add The Book</button>
+                    <button class="cancel-btn" (click)="cancel()">Cancel</button>
+                    <button class="add-btn" (click)="onSubmit()">Add The Book</button>
                 </div>
             </div>
         </div>
-    </div>
-</div>

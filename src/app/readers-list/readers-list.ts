@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-readers-list',
-  imports: [Navbar,SidebarBibliothecaire],
+  imports: [],
   standalone:true,
   templateUrl: './readers-list.html',
   styleUrl: './readers-list.scss',

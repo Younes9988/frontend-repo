@@ -1,0 +1,12 @@
+.page-content {
+  margin-left: 230px;      /* width of sidebar */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

@@ -1,85 +1,121 @@
-<app-sidebar-bibliothecaire></app-sidebar-bibliothecaire>
-<div class="page-content">
-    <app-navbar></app-navbar>
-    <div class="scroll-container">
-        <!-- Books Page Layout -->
-        <div class="books-page">
-            <div class="book-details-container">
+<div class="books-page">
 
-                <!-- Header -->
-                <div class="header">
-                    <h2>Book #R0001</h2>
+  <div class="book-details-container" *ngIf="livre">
 
-                    <div class="action-buttons">
-                        <button class="delete-btn">
-                            <i class="fa-solid fa-trash"></i> Delete
-                        </button>
+    <!-- Header -->
+    <div class="header">
+      <h2>{{ livre.titre }}</h2>
 
-                        <button class="update-btn">
-                            <i class="fa-solid fa-pen"></i> Update
-                        </button>
-                    </div>
-                </div>
+      <div class="action-buttons">
 
-                <!-- Content Box -->
-                <div class="details-box">
+       <!-- Normal mode -->
+<ng-container *ngIf="!edit">
+  <button
+    type="button"
+    class="delete-btn"
+    (click)="onDelete()"
+    [disabled]="saving"
+  >
+    <i class="fa-solid fa-trash"></i> Delete
+  </button>
 
-                    <!-- LEFT: COVER -->
-                    <div class="cover-section">
-                        <img src="assets/images/bookcover.webp" alt="Book Cover">
-                    </div>
+  <button
+    type="button"
+    class="update-btn"
+    (click)="enableEdit()"
+    [disabled]="saving"
+  >
+    <i class="fa-solid fa-pen"></i> Update
+  </button>
+</ng-container>
 
-                    <!-- RIGHT: INFO -->
-                    <div class="info-section">
+<!-- Edit mode -->
+<ng-container *ngIf="edit">
+  <button
+    type="button"
+    class="update-btn"
+    (click)="saveEdit()"
+    [disabled]="saving"
+  >
+    <i class="fa-solid fa-check"></i> Save
+  </button>
 
-                        <div class="row">
-                            <div class="field">
-                                <label>Title</label>
-                                <input type="text" value="THE HOBBIT">
-                            </div>
-
-                            <div class="field">
-                                <label>Category</label>
-                                <input type="text" value="Culture And Arts">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="field">
-                                <label>Author</label>
-                                <input type="text" value="Tony Lace">
-                            </div>
-
-                            <div class="field">
-                                <label>Number Of Copies</label>
-                                <input type="number" value="3">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="field">
-                                <label>ISBN</label>
-                                <input type="text" value="1245678">
-                            </div>
-
-                            <div class="field">
-                                <label>Acquisition Date</label>
-                                <input type="text" value="20/02/2025">
-                            </div>
-                        </div>
-
-                        <div class="description-field">
-                            <label>Description</label>
-                            <textarea rows="3">This book is about how can a human change habbits</textarea>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
+  <button
+    type="button"
+    class="delete-btn"
+    (click)="cancelEdit()"
+    [disabled]="saving"
+  >
+    <i class="fa-solid fa-xmark"></i> Cancel
+  </button>
+</ng-container>
 
 
-        </div>
+      </div>
+
     </div>
+
+    <!-- Content -->
+    <div class="details-box">
+
+      <!-- LEFT -->
+      <div class="cover-section">
+        <img [src]="'http://localhost:8760/' + livre.image" alt="book cover" />
+      </div>
+
+      <!-- RIGHT -->
+      <div class="info-section">
+
+        <div class="row">
+          <div class="field">
+            <label>Title</label>
+            <input type="text" [(ngModel)]="form.titre" [disabled]="!edit">
+          </div>
+
+          <div class="field">
+            <label>Category</label>
+            <input type="text" [(ngModel)]="form.category" [disabled]="!edit">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Author</label>
+            <input type="text" [(ngModel)]="form.auteur" [disabled]="!edit">
+          </div>
+
+          <div class="field">
+            <label>Number Of Copies</label>
+            <input type="number" [(ngModel)]="form.nombreCopies" [disabled]="!edit">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>ISBN</label>
+            <input type="text" [(ngModel)]="form.isbn" [disabled]="!edit">
+          </div>
+
+          <div class="field">
+            <label>Acquisition Date</label>
+            <input type="date" [(ngModel)]="form.datePublication" [disabled]="!edit">
+          </div>
+        </div>
+
+        <div class="description-field">
+          <label>Description</label>
+          <textarea rows="3" [(ngModel)]="form.description" [disabled]="!edit">
+    </textarea>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <!-- Optional loading -->
+  <p *ngIf="!livre">Loading book details...</p>
+
 </div>

@@ -4,7 +4,7 @@ import { SidebarBibliothecaire } from '../sidebar-bibliothecaire/sidebar-bibliot
 
 @Component({
   selector: 'app-add-readers',
-  imports: [Navbar,SidebarBibliothecaire],
+  imports: [],
   templateUrl: './add-readers.html',
   styleUrl: './add-readers.scss',
 })
