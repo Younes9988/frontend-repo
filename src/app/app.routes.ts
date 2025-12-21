@@ -10,25 +10,39 @@ import { ReadersDetail } from './readers-detail/readers-detail';
 import { AddReaders } from './add-readers/add-readers';
 import { EmpruntsList } from './emprunt-list/emprunt-list';
 import { AddEmprunt } from './add-emprunt/add-emprunt';
-
+import { adminGuard } from './guards/admin.guard';
+import { UserBookList } from './userbooklist/userbooklist';
+import { authGuard } from './guards/auth.guard';
+import { UserLayout } from './user-layout/user-layout';
+import { DetailBookUser } from './detail-book-user/detail-book-user';
 export const routes: Routes = [
 
   // 🔹 Login (ONLY exact root)
   { path: '', component: Login, pathMatch: 'full' },
 
   // 🔹 Layout with sidebar + navbar
-  {
-    path: '',
-    component: BibliothecaireLayout,
-    children: [
-      { path: 'adminbooklist', component: BibliothecaireBookList },
-      { path: 'add-book', component: AddBook },
-      { path: 'book-details/:id', component: DetailBookBibliothecaire },
-      { path: 'users-list', component: ReadersList },
-      { path: 'user-details/:id', component: ReadersDetail },
-      { path: 'add-user', component: AddReaders },
-      { path: 'emprunt-list', component: EmpruntsList },
-      { path: 'add-emprunt', component: AddEmprunt },
-    ]
-  }
+{
+  path: '',
+  component: BibliothecaireLayout,
+  canActivate: [adminGuard],   // 🔐 HERE
+  children: [
+    { path: 'adminbooklist', component: BibliothecaireBookList },
+    { path: 'add-book', component: AddBook },
+    { path: 'book-details/:id', component: DetailBookBibliothecaire },
+    { path: 'users-list', component: ReadersList },
+    { path: 'user-details/:id', component: ReadersDetail },
+    { path: 'add-user', component: AddReaders },
+    { path: 'emprunt-list', component: EmpruntsList },
+    { path: 'add-emprunt', component: AddEmprunt },
+  ]
+},
+{
+  path: '',
+  component: UserLayout,   // your user sidebar layout
+  canActivateChild: [authGuard],
+  children: [
+    { path: 'userbooklist', component: UserBookList },
+    { path: 'user-book-details/:id', component: DetailBookUser }
+  ]
+}
 ];

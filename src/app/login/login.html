@@ -16,24 +16,40 @@
 
       <h2>Sign in</h2>
       <p class="subtitle">Enter your login details to sign in</p>
+<form (ngSubmit)="submit()">
 
-      <form>
+  <label>Email</label>
+  <div class="input-group">
+    <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+    <input
+      type="email"
+      placeholder="example@gmail.com"
+      [(ngModel)]="email"
+      name="email"
+      required
+    />
+  </div>
 
-        <label>Email</label>
-        <div class="input-group">
-        <span class="icon"><i class="fa-solid fa-envelope"></i></span>
-          <input type="email" placeholder="example@gmail.com" />
-        </div>
+  <label>Password</label>
+  <div class="input-group">
+    <span class="icon"><i class="fa-solid fa-lock"></i></span>
+    <input
+      type="password"
+      placeholder="••••••••"
+      [(ngModel)]="password"
+      name="password"
+      required
+    />
+  </div>
 
-        <label>Password</label>
-        <div class="input-group">
-          <span class="icon"><i class="fa-solid fa-lock"></i></span>
-          <input type="password" placeholder="••••••••" />
-        </div>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-        <button type="submit" class="btn">Sign in</button>
+  <button type="submit" class="btn" [disabled]="loading">
+    {{ loading ? 'Signing in...' : 'Sign in' }}
+  </button>
 
-      </form>
+</form>
+
     </div>
 
   </div>

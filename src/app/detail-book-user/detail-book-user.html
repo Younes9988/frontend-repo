@@ -1,0 +1,77 @@
+<div class="books-page">
+
+  <div class="book-details-container" *ngIf="!loading && livre">
+
+    <!-- Header -->
+    <div class="header">
+      <h2>{{ livre.titre }}</h2>
+
+      <!-- Availability / Reserve -->
+      <div class="action-buttons">
+        <span
+          class="status"
+          [class.available]="isAvailable"
+          [class.unavailable]="!isAvailable"
+        >
+          {{ isAvailable ? 'Available' : 'Not Available' }}
+        </span>
+
+        <button
+          class="reserve-btn"
+          *ngIf="isAvailable"
+          (click)="reserve()"
+        >
+          <i class="fa-solid fa-bookmark"></i> Reserve
+        </button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="details-box">
+
+      <!-- LEFT -->
+      <div class="cover-section">
+        <img
+          [src]="'http://localhost:8760/' + livre.image"
+          alt="book cover"
+        />
+      </div>
+
+      <!-- RIGHT -->
+      <div class="info-section">
+
+        <div class="row">
+          <div class="field">
+            <label>Title</label>
+            <input type="text" [value]="livre.titre" disabled>
+          </div>
+
+          
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Author</label>
+            <input type="text" [value]="livre.auteur" disabled>
+          </div>
+
+       
+        </div>
+
+        <div class="row">
+         <div class="field">
+            <label>Category</label>
+            <input type="text" [value]="livre.category" disabled>
+          </div>
+        </div>
+
+        <div class="description-field">
+          <label>Description</label>
+          <textarea rows="3" [value]="livre.description" disabled></textarea>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

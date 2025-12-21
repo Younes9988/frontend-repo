@@ -1,0 +1,45 @@
+<div class="books-page">
+
+  <!-- Header -->
+  <div class="books-header">
+
+    <!-- SEARCH -->
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input
+        type="text"
+        placeholder="Search..."
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearchChange($event)"
+      />
+    </div>
+
+    <!-- FILTER -->
+    <select
+      class="filter-select"
+      [(ngModel)]="selectedCategory"
+      (ngModelChange)="onCategoryChange($event)"
+    >
+      <option *ngFor="let cat of categories" [value]="cat.value">
+        {{ cat.label }}
+      </option>
+    </select>
+
+  </div>
+
+  <!-- GRID -->
+  <div class="books-grid">
+    <div
+      class="book-card"
+      *ngFor="let livre of filteredLivres$ | async"
+      (click)="goToDetails(livre.livreId)"
+    >
+      <img [src]="'http://localhost:8760/' + livre.image" />
+      <div class="book-info">
+        <h4>{{ livre.titre }}</h4>
+        <p>By {{ livre.auteur }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>

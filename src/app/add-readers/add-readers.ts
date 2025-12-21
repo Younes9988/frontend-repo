@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UtilisateurService } from '../services/utilisateur.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-add-readers',
@@ -27,7 +27,7 @@ export class AddReaders {
   errorMessage = '';
 
   constructor(
-    private utilisateurService: UtilisateurService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -35,7 +35,12 @@ export class AddReaders {
     this.errorMessage = '';
     this.saving = true;
 
-    this.utilisateurService.createLecteur(this.form).subscribe({
+    this.authService.register({
+      email: this.form.email,
+      password: this.form.motDePasse,
+      nom: this.form.nom,
+      prenom: this.form.prenom
+    }).subscribe({
       next: () => {
         this.router.navigate(['/users-list']);
       },

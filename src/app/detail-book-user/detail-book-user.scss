@@ -1,0 +1,143 @@
+
+
+.books-page {
+  padding: 20px 40px;
+  padding-top: 90px;           /* space under navbar */
+}
+.book-details-container {
+  padding: 25px 40px;
+  width: 95%;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+
+  button {
+    padding: 10px 22px;
+    border-radius: 20px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .delete-btn {
+    background: #ff6f7e;
+    color: white;
+  }
+
+  .update-btn {
+    background: #e6d98d;
+    color: #444;
+  }
+}
+
+/* CONTENT WRAPPER */
+.details-box {
+  padding: 25px;
+  border-radius: 8px;
+  display: flex;
+  gap: 30px;
+  background: #f8fbff;
+}
+
+/* LEFT IMAGE */
+.cover-section img {
+  width: 220px;
+  border-radius: 4px;
+}
+
+/* RIGHT FIELDS */
+.info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+
+  label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  input {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid #a8c7d9;
+    outline: none;
+    font-size: 15px;
+    background: white;
+  }
+}
+
+.description-field {
+  display: flex;
+  flex-direction: column;
+
+  textarea {
+    border-radius: 14px;
+    border: 1px solid #a8c7d9;
+    padding: 12px;
+    resize: none;
+    font-size: 15px;
+    background: white;
+  }
+}
+.status {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.available {
+  background: #e6f7ec;
+  color: #2e7d32;
+}
+
+.unavailable {
+  background: #fdecea;
+  color: #c62828;
+}
+
+.reserve-btn {
+  background: #6dbd45;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 12px;
+}
+
+.reserve-btn:hover {
+  background: #5aa938;
+}
