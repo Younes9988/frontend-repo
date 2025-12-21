@@ -13,20 +13,24 @@ export class EmpruntService {
   private empruntsSubject = new BehaviorSubject<Emprunt[]>([]);
   emprunts$ = this.empruntsSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-fetchEmprunts() {
-  this.http.get<Emprunt[]>(this.apiUrl)
-    .subscribe({
-      next: e => this.empruntsSubject.next(e),
-      error: err => {
-        console.error('Erreur chargement emprunts', err);
-        this.empruntsSubject.next([]);
-      }
-    });
-}
+  fetchEmprunts() {
+    this.http.get<Emprunt[]>(this.apiUrl)
+      .subscribe({
+        next: e => this.empruntsSubject.next(e),
+        error: err => {
+          console.error('Erreur chargement emprunts', err);
+          this.empruntsSubject.next([]);
+        }
+      });
+  }
 
-
+  getEmpruntsByLecteur(id: number) {
+    return this.http.get<Emprunt[]>(
+      `${this.apiUrl}/lecteur/${id}`
+    );
+  }
   creerEmprunt(lecteurId: number, livreId: number) {
     return this.http.post<Emprunt>(
       `${this.apiUrl}?lecteurId=${lecteurId}&livreId=${livreId}`,
@@ -40,4 +44,16 @@ fetchEmprunts() {
       null
     );
   }
+  // emprunt.service.ts
+fetchEmpruntsByLecteur(lecteurId: number) {
+  this.http
+    .get<Emprunt[]>(`${this.apiUrl}/lecteur/${lecteurId}`)
+    .subscribe({
+      next: e => this.empruntsSubject.next(e),
+      error: err => {
+        console.error('Erreur chargement emprunts lecteur', err);
+        this.empruntsSubject.next([]);
+      }
+    });
+}
 }

@@ -1,1 +1,60 @@
-<p>emprunt-user-list works!</p>
+<div class="users-page">
+
+  <div class="top-bar">
+    <h2>My Loans</h2>
+
+    <div class="right-controls">
+
+      <!-- Search -->
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          placeholder="Search by book id"
+          (input)="search$.next($any($event.target).value)"
+        />
+      </div>
+
+      <!-- Statut filter -->
+      <select
+        class="filter-select"
+        (change)="statut$.next($any($event.target).value)"
+      >
+        <option *ngFor="let s of statuts" [value]="s.value">
+          {{ s.label }}
+        </option>
+      </select>
+
+    </div>
+  </div>
+
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Livre</th>
+        <th>Date Emprunt</th>
+        <th>Retour prévu</th>
+        <th>Temps restant</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let e of pagedEmprunts$ | async">
+        <td>{{ e.livreId }}</td>
+        <td>{{ e.dateEmprunt | date }}</td>
+        <td>{{ e.dateRetourPrevue | date }}</td>
+        <td>
+          <span *ngIf="daysLeft(e) >= 0">
+            {{ daysLeft(e) }} days left
+          </span>
+          <span *ngIf="daysLeft(e) < 0" class="late">
+            {{ -daysLeft(e) }} days late
+          </span>
+        </td>
+        <td>{{ e.statutEmprunt }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

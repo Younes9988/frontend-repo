@@ -1,0 +1,226 @@
+
+
+.users-page {
+  padding: 20px 40px;
+  padding-top: 90px;           /* space under navbar */
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+/* Align items on the right */
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* SEARCH BOX */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #bcd7e3;
+  padding: 6px 12px;
+  border-radius: 25px;
+  height: 32px;
+
+  input {
+    border: none;
+    outline: none;
+    font-size: 13px;
+    width: 180px;
+  }
+
+  i {
+    color: #6a8291;
+    font-size: 14px;
+  }
+}
+
+/* FILTER BOX */
+.filter-box {
+  background: #ffffff;
+  border: 1px solid #bcd7e3;
+  padding: 6px 12px;
+  border-radius: 25px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  span {
+    font-size: 13px;
+    color: #4b6978;
+  }
+
+  i {
+    color: #6a8291;
+    font-size: 14px;
+  }
+}
+
+/* ADD USER BUTTON (smaller version) */
+.add-user-btn {
+  background: #387dad;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 25px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+}
+
+}
+
+/* TABLE DESIGN */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+
+  thead {
+    background: #85b9d8;
+    color: white;
+
+    th {
+      padding: 15px 10px;
+      text-align: left;
+      font-size: 14px;
+    }
+  }
+
+  tbody tr {
+    background: #f9fbfc;
+    border-bottom: 1px solid #e0ebf2;
+
+    &:hover {
+      background: #eef6fc;
+    }
+
+    td {
+      padding: 14px 10px;
+      font-size: 14px;
+    }
+  }
+}
+
+/* ACTIVE / INACTIVE STATUS */
+.active {
+  color: green;
+  font-weight: bold;
+}
+
+.inactive {
+  color: red;
+  font-weight: bold;
+}
+
+.details-btn {
+  background: #0a5c63;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+.filter-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: #387dad;
+  color: #fff;
+
+  border: 1px solid #d8e2eb;
+  border-radius: 5px;
+
+  padding: 8px 38px 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 320 512'%3E%3Cpath d='M143 352.3 7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0L160 256l96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.4-24.6 9.4-33.9 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
+
+.filter-select:hover {
+  background-color: #236fa0;
+}
+
+.filter-select:focus {
+  outline: none;
+}
+.pagination-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+
+  button {
+    height: 32px;
+    min-width: 32px;
+    padding: 0 12px;
+
+    border-radius: 25px;
+    border: 1px solid #bcd7e3;
+
+    background: #ffffff;
+    color: #387dad;
+
+    font-size: 13px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #eef6fc;
+    }
+
+    &.active {
+      background: #387dad;
+      color: white;
+      font-weight: bold;
+      border-color: #387dad;
+    }
+  }
+
+  select {
+    height: 32px;
+    padding: 0 14px;
+
+    border-radius: 25px;
+    border: 1px solid #bcd7e3;
+
+    background: #ffffff;
+    color: #4b6978;
+
+    font-size: 13px;
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #eef6fc;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

@@ -21,6 +21,7 @@ export class AuthService {
         if (this.isBrowser) {
           localStorage.setItem('token', res.accessToken);
           localStorage.setItem('role', res.role);
+          localStorage.setItem('email', data.email);
         }
       })
     );
@@ -51,6 +52,10 @@ export class AuthService {
     if (!this.isBrowser) return null;
     return localStorage.getItem('role');
   }
+  get email(): string | null {
+  if (!this.isBrowser) return null;
+  return localStorage.getItem('email');
+}
 
   isLoggedIn(): boolean {
     return !!this.token;

@@ -15,6 +15,7 @@ import { UserBookList } from './userbooklist/userbooklist';
 import { authGuard } from './guards/auth.guard';
 import { UserLayout } from './user-layout/user-layout';
 import { DetailBookUser } from './detail-book-user/detail-book-user';
+import { EmpruntUserList } from './emprunt-user-list/emprunt-user-list';
 export const routes: Routes = [
 
   // 🔹 Login (ONLY exact root)
@@ -42,7 +43,8 @@ export const routes: Routes = [
   canActivateChild: [authGuard],
   children: [
     { path: 'userbooklist', component: UserBookList },
-    { path: 'user-book-details/:id', component: DetailBookUser }
+    { path: 'user-book-details/:id', component: DetailBookUser },
+    {path:'user-emprunt-list',component:EmpruntUserList}
   ]
 }
 ];

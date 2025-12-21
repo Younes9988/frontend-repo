@@ -26,7 +26,10 @@ private apiUrl = 'http://localhost:5050/MSUTILISATEUR/api/utilisateurs';
   getUtilisateur(id: number) {
     return this.http.get<Utilisateur>(`${this.apiUrl}/${id}`);
   }
-
+  
+  getByEmail(email: string) {
+    return this.http.get<any>(`${this.apiUrl}/by-email/${email}`);
+  }
   deleteUtilisateur(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
