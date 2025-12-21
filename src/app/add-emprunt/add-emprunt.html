@@ -1,0 +1,89 @@
+<div class="users-page">
+  <h2>Add New Emprunt</h2>
+
+  <form class="add-user-form" (ngSubmit)="submit()">
+
+    <!-- WRAP BOTH ROWS IN A CONTAINER -->
+    <div class="form-row-wrapper">
+      
+      <!-- BOOK SELECTION -->
+      <div class="row">
+        <label>Book *</label>
+
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search book by title..."
+          (input)="livreSearch$.next($any($event.target).value)"
+        />
+
+        <ul
+          class="dropdown"
+          *ngIf="!selectedLivre && (filteredLivres$ | async)?.length">
+          <li
+            *ngFor="let l of filteredLivres$ | async"
+            (click)="selectedLivre = l">
+            {{ l.titre }} — {{ l.auteur }}
+          </li>
+        </ul>
+
+        <div class="chip" *ngIf="selectedLivre">
+  {{ selectedLivre.titre }}
+  <span (click)="clearSelectedLivre()">×</span>
+</div>
+      </div>
+
+      <!-- USER SELECTION -->
+      <div class="row">
+        <label>User *</label>
+
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search user by name..."
+          (input)="utilisateurSearch$.next($any($event.target).value)"
+        />
+
+        <ul
+          class="dropdown"
+          *ngIf="!selectedUtilisateur && (filteredUtilisateurs$ | async)?.length">
+          <li
+            *ngFor="let u of filteredUtilisateurs$ | async"
+            (click)="selectedUtilisateur = u">
+            {{ u.nom }} {{ u.prenom }}
+          </li>
+        </ul>
+
+      <div class="chip user" *ngIf="selectedUtilisateur">
+  {{ selectedUtilisateur.nom }} {{ selectedUtilisateur.prenom }}
+  <span (click)="clearSelectedUtilisateur()">×</span>
+</div>
+      </div>
+
+    </div>
+    <!-- END WRAPPER -->
+
+    <!-- ERROR MESSAGE -->
+    <p class="error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
+
+    <!-- BUTTONS -->
+    <div class="btns">
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="cancel()">
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        class="add-btn"
+        [disabled]="saving">
+        {{ saving ? 'Saving...' : 'Create Emprunt' }}
+      </button>
+    </div>
+
+  </form>
+</div>

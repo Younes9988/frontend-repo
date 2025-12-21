@@ -1,0 +1,94 @@
+<div class="users-page">
+
+  <div class="top-bar">
+    <h2>Emprunts</h2>
+
+    <div class="right-controls">
+
+      <!-- Search -->
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          placeholder="Search (lecteur / livre)"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="onSearchChange($event)"
+        />
+      </div>
+
+      <!-- Statut filter -->
+      <select
+        class="filter-select"
+        [(ngModel)]="selectedStatut"
+        (ngModelChange)="onStatutChange($event)"
+      >
+        <option *ngFor="let s of statuts" [value]="s.value">
+          {{ s.label }}
+        </option>
+      </select>
+          <button class="add-user-btn" routerLink="/add-emprunt">
+  <i class="fa-solid fa-plus"></i> Add Emprunt
+</button>
+    </div>
+  </div>
+
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Lecteur ID</th>
+        <th>Livre ID</th>
+        <th>Date Emprunt</th>
+        <th>Retour Prévu</th>
+        <th>Statut</th>
+        <th>Pénalité</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let e of pagedEmprunts$ | async">
+        <td>{{ e.lecteurId }}</td>
+        <td>{{ e.livreId }}</td>
+        <td>{{ e.dateEmprunt | date }}</td>
+        <td>{{ e.dateRetourPrevue | date }}</td>
+        <td>{{ e.statutEmprunt }}</td>
+        <td>{{ e.penalite }} DH</td>
+        <td>
+          <button
+            class="details-btn"
+            *ngIf="e.statutEmprunt === 'EN_COURS'"
+            (click)="retourner(e)"
+          >
+            Retourner
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Pagination -->
+<div class="pagination-bar" *ngIf="totalPages$ | async as totalPages">
+
+  <!-- Previous -->
+  <button (click)="prevPage()">«</button>
+
+  <!-- Page numbers -->
+  <button
+    *ngFor="let _ of [].constructor(totalPages); let i = index"
+    (click)="goToPage(i + 1)"
+    [class.active]="(currentPage$ | async) === i + 1">
+    {{ i + 1 }}
+  </button>
+
+  <!-- Next -->
+  <button (click)="nextPage(totalPages)">»</button>
+
+  <!-- Page size -->
+  <select (change)="changePageSize($any($event.target).value)">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+  </select>
+
+</div>
+
+</div>

@@ -1,68 +1,54 @@
+<div class="users-page" *ngIf="!loading">
 
+  <div class="header">
+    <h2>User Details</h2>
 
-<div class="page-content">
+    <div class="btns">
+      <button class="delete-btn" (click)="deleteUser()">Delete</button>
+      <button class="update-btn" (click)="updateUser()">Update</button>
+    </div>
+  </div>
 
-    <div class="scroll-container">
+  <div class="details-box">
 
-        <div class="users-page">
+    <div class="info">
 
-
-            <div class="header">
-                <h2>User Details</h2>
-
-                <div class="btns">
-                    <button class="delete-btn">Delete</button>
-                    <button class="update-btn">Update</button>
-                </div>
-            </div>
-
-            <div class="details-box">
-
-                <div class="info">
-
-                    <div class="row">
-                        <div class="field">
-                            <label>First Name</label>
-                            <input type="text" value="John">
-                        </div>
-
-                        <div class="field">
-                            <label>Last Name</label>
-                            <input type="text" value="Doe">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="field">
-                            <label>Email</label>
-                            <input type="text" value="john@gmail.com">
-                        </div>
-
-                        <div class="field">
-                            <label>Phone</label>
-                            <input type="text" value="0655555555">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="field">
-                            <label>Role</label>
-                            <input type="text" value="Reader">
-                        </div>
-
-                        <div class="field">
-                            <label>Status</label>
-                            <input type="text" value="Active">
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
+      <div class="row">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" [value]="user.prenom" readonly>
         </div>
 
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" [value]="user.nom" readonly>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Email</label>
+          <input type="text" [value]="user.email" readonly>
+        </div>
+
+        <div class="field">
+          <label>Phone</label>
+          <input type="text" [value]="user.telephone" readonly>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Role</label>
+          <input type="text" [value]="user.role" readonly>
+        </div>
+
+        <div class="field">
+          <label>Status</label>
+          <input type="text" [value]="user.actif ? 'Active' : 'Inactive'" readonly>
+        </div>
+      </div>
+
     </div>
+  </div>
 </div>

@@ -8,6 +8,8 @@ import { DetailBookBibliothecaire } from './detail-book-bibliothecaire/detail-bo
 import { ReadersList } from './readers-list/readers-list';
 import { ReadersDetail } from './readers-detail/readers-detail';
 import { AddReaders } from './add-readers/add-readers';
+import { EmpruntsList } from './emprunt-list/emprunt-list';
+import { AddEmprunt } from './add-emprunt/add-emprunt';
 
 export const routes: Routes = [
 
@@ -23,8 +25,10 @@ export const routes: Routes = [
       { path: 'add-book', component: AddBook },
       { path: 'book-details/:id', component: DetailBookBibliothecaire },
       { path: 'users-list', component: ReadersList },
-      { path: 'user-details', component: ReadersDetail },
-      { path: 'add-user', component: AddReaders }
+      { path: 'user-details/:id', component: ReadersDetail },
+      { path: 'add-user', component: AddReaders },
+      { path: 'emprunt-list', component: EmpruntsList },
+      { path: 'add-emprunt', component: AddEmprunt },
     ]
   }
 ];
