@@ -5,7 +5,7 @@ import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 import { EmpruntService } from '../services/emprunt.service';
 import { Emprunt } from '../models/emprunt.model';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-emprunts-list',
@@ -38,7 +38,10 @@ export class EmpruntsList implements OnInit {
     { value: 'EN_RETARD', label: 'En retard' }
   ];
 
-  constructor(private empruntService: EmpruntService) {}
+  constructor(
+    private empruntService: EmpruntService,
+    private router: Router
+  ) {}
 
 ngOnInit(): void {
   this.emprunts$ = this.empruntService.emprunts$;
@@ -89,6 +92,18 @@ ngOnInit(): void {
   retourner(emprunt: Emprunt) {
     this.empruntService.retournerEmprunt(emprunt.id)
       .subscribe(() => this.empruntService.fetchEmprunts());
+  }
+
+  goToDetails(emprunt: Emprunt) {
+    this.router.navigate(
+      ['/emprunt-details', emprunt.id],
+      {
+        queryParams: {
+          livreId: emprunt.livreId,
+          lecteurId: emprunt.lecteurId
+        }
+      }
+    );
   }
   //pagination methodes
     // ⬅ Previous page

@@ -41,9 +41,9 @@ export class Login {
 
       // ✅ ROLE-BASED REDIRECT
       if (this.authService.isAdmin()) {
-        this.router.navigate(['/adminbooklist']);
+        this.router.navigate(['/Bhome']);
       } else {
-        this.router.navigate(['/userbooklist']);
+        this.router.navigate(['/user-home']);
       }
     },
     error: () => {

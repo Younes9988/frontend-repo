@@ -54,6 +54,9 @@
         <td>{{ e.statutEmprunt }}</td>
         <td>{{ e.penalite }} DH</td>
         <td>
+          <button class="details-btn" (click)="goToDetails(e)">
+            Details
+          </button>
           <button
             class="details-btn"
             *ngIf="e.statutEmprunt === 'EN_COURS'"

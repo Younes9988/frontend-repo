@@ -1,0 +1,93 @@
+<section class="user-dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p class="welcome">Welcome back, {{ userName }}!</p>
+    </div>
+  </div>
+
+  <div class="books-header">
+    <h2>Books for you</h2>
+    <i class="fa-solid fa-location-dot"></i>
+  </div>
+
+  <div class="books-grid">
+    <a
+      class="book-card"
+      *ngFor="let book of (booksForYou$ | async)"
+      [routerLink]="['/user-book-details', book.livreId]"
+    >
+      <div class="book-cover">
+        <img
+          [src]="book.image ? ('http://localhost:8760/' + book.image) : 'assets/images/bookcover.webp'"
+          [alt]="book.titre"
+        />
+      </div>
+      <div class="book-info">
+        <div class="book-title">{{ book.titre }}</div>
+        <div class="book-author">By {{ book.auteur }}</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="section-title">
+    <h2>Quick Actions</h2>
+    <i class="fa-solid fa-rocket"></i>
+  </div>
+
+  <div class="actions-grid">
+    <div class="action-card disabled" aria-disabled="true">
+      <div class="action-icon profile">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="action-text">My profile</div>
+    </div>
+
+    <a class="action-card" routerLink="/userbooklist">
+      <div class="action-icon books">
+        <i class="fa-solid fa-book-open"></i>
+      </div>
+      <div class="action-text">View Available Books</div>
+    </a>
+
+    <a class="action-card" routerLink="/user-emprunt-list">
+      <div class="action-icon loans">
+        <i class="fa-solid fa-rotate"></i>
+      </div>
+      <div class="action-text">Manage My Loans</div>
+    </a>
+  </div>
+
+  <div class="section-title">
+    <h2>Late loans</h2>
+    <i class="fa-solid fa-triangle-exclamation"></i>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Loan Date</th>
+          <th>Return Date</th>
+          <th>Status</th>
+          <th>Actual Date</th>
+          <th>Penalty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loan of (lateLoans$ | async)">
+          <td>#{{ loan.id }}</td>
+          <td>{{ loan.dateEmprunt | date:'dd/MM/yyyy' }}</td>
+          <td>{{ loan.dateRetourPrevue | date:'dd/MM/yyyy' }}</td>
+          <td class="status late">Late</td>
+          <td>{{ loan.dateRetourEffective ? (loan.dateRetourEffective | date:'dd/MM/yyyy') : '-' }}</td>
+          <td>{{ loan.penalite }} MAD</td>
+        </tr>
+        <tr *ngIf="(lateLoans$ | async)?.length === 0">
+          <td colspan="6" class="empty">No late loans.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

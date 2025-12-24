@@ -31,6 +31,10 @@ export class EmpruntService {
       `${this.apiUrl}/lecteur/${id}`
     );
   }
+
+  getEmpruntById(id: number) {
+    return this.http.get<Emprunt>(`${this.apiUrl}/${id}`);
+  }
   creerEmprunt(lecteurId: number, livreId: number) {
     return this.http.post<Emprunt>(
       `${this.apiUrl}?lecteurId=${lecteurId}&livreId=${livreId}`,

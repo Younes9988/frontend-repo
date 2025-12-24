@@ -1,0 +1,86 @@
+<div class="emprunt-detail-page" *ngIf="!loading && emprunt">
+  <div class="header">
+    <h2>Emprunt Details</h2>
+  </div>
+
+  <div class="details-grid">
+    <div class="card">
+      <h3>Emprunt</h3>
+      <div class="field">
+        <span class="label">Status</span>
+        <span class="value">{{ emprunt.statutEmprunt }}</span>
+      </div>
+      <div class="field">
+        <span class="label">Loan Date</span>
+        <span class="value">{{ emprunt.dateEmprunt | date:'dd/MM/yyyy' }}</span>
+      </div>
+      <div class="field">
+        <span class="label">Return Due</span>
+        <span class="value">{{ emprunt.dateRetourPrevue | date:'dd/MM/yyyy' }}</span>
+      </div>
+      <div class="field">
+        <span class="label">Actual Return</span>
+        <span class="value">{{ emprunt.dateRetourEffective ? (emprunt.dateRetourEffective | date:'dd/MM/yyyy') : '-' }}</span>
+      </div>
+      <div class="field">
+        <span class="label">Penalty</span>
+        <span class="value">{{ emprunt.penalite }} DH</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>User</h3>
+      <ng-container *ngIf="user; else userMissing">
+        <div class="field">
+          <span class="label">Name</span>
+          <span class="value">{{ user.prenom }} {{ user.nom }}</span>
+        </div>
+        <div class="field">
+          <span class="label">Email</span>
+          <span class="value">{{ user.email }}</span>
+        </div>
+        <div class="field">
+          <span class="label">Phone</span>
+          <span class="value">{{ user.telephone }}</span>
+        </div>
+        <div class="field">
+          <span class="label">Role</span>
+          <span class="value">{{ user.role }}</span>
+        </div>
+      </ng-container>
+      <ng-template #userMissing>
+        <div class="field">
+          <span class="label">Status</span>
+          <span class="value">User not found</span>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="card">
+      <h3>Book</h3>
+      <ng-container *ngIf="book; else bookMissing">
+        <div class="book-cover">
+          <img [src]="'http://localhost:8760/' + book.image" [alt]="book.titre" />
+        </div>
+        <div class="field">
+          <span class="label">Title</span>
+          <span class="value">{{ book.titre }}</span>
+        </div>
+        <div class="field">
+          <span class="label">Author</span>
+          <span class="value">{{ book.auteur }}</span>
+        </div>
+        <div class="field">
+          <span class="label">Category</span>
+          <span class="value">{{ book.category }}</span>
+        </div>
+      </ng-container>
+      <ng-template #bookMissing>
+        <div class="field">
+          <span class="label">Status</span>
+          <span class="value">Book not found</span>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

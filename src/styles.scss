@@ -1,9 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+  --font-sans: "Manrope", "Segoe UI", Tahoma, Arial, sans-serif;
+  --font-display: "Playfair Display", "Times New Roman", serif;
+  --text-color: #1a2433;
+  --text-muted: #5b667a;
+  --text-accent: #0c5f7e;
+}
+
 html, body {
   margin: 0 !important;
   padding: 0 !important;
   width: 100%;
   height: 100%;
   overflow: hidden !important; 
-  background-color: #F5F9FB; /* 🔥 FORCE disable scroll */
+  background-color: #F5F9FB; /* dY"ť FORCE disable scroll */
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0.3px;
+  color: var(--text-color);
+  margin: 0 0 0.4em 0;
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2.1rem, 2vw + 1.6rem, 3rem); font-weight: 700; }
+h2 { font-size: clamp(1.8rem, 1.4vw + 1.4rem, 2.4rem); font-weight: 700; }
+h3 { font-size: clamp(1.5rem, 1vw + 1.2rem, 2rem); font-weight: 600; }
+h4 { font-size: 1.25rem; font-weight: 600; }
+h5 { font-size: 1.1rem; font-weight: 600; }
+h6 { font-size: 1rem; font-weight: 600; }
+
+p, li, label, input, textarea, select, button {
+  font-family: var(--font-sans);
+}
+
+p {
+  margin: 0 0 1em 0;
+  color: var(--text-muted);
+}
+
+a {
+  color: var(--text-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

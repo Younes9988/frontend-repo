@@ -1,0 +1,247 @@
+.user-dashboard {
+  padding: 100px 32px 32px;
+  min-height: calc(100vh - 70px);
+  box-sizing: border-box;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #1d2c3a;
+  }
+
+  .welcome {
+    margin: 4px 0 0 0;
+    color: #4f5f6f;
+    font-weight: 500;
+  }
+}
+
+.books-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 16px;
+
+  h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #1f3344;
+  }
+
+  i {
+    color: #6a8aa1;
+    font-size: 14px;
+  }
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  gap: 100px;
+  margin-bottom: 22px;
+  justify-items: center;
+  justify-content: center;
+}
+
+.book-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 8px 14px rgba(17, 29, 47, 0.08);
+  border: 1px solid rgba(159, 185, 200, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 200px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 18px rgba(17, 29, 47, 0.12);
+  }
+}
+
+.book-cover {
+  width: 100%;
+  aspect-ratio: 2.6 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #eef3f6;
+  display: grid;
+  place-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.book-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1f3b4d;
+  text-transform: uppercase;
+}
+
+.book-author {
+  font-size: 11px;
+  color: #5c6c7c;
+  font-weight: 600;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 14px;
+
+  h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #1f3344;
+  }
+
+  i {
+    color: #6a8aa1;
+    font-size: 14px;
+  }
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.action-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  box-shadow: 0 10px 18px rgba(17, 29, 47, 0.08);
+  border: 1px solid rgba(159, 185, 200, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: inherit;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 22px rgba(17, 29, 47, 0.12);
+  }
+}
+
+.action-card.disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.action-text {
+  font-weight: 600;
+  color: #3b5870;
+  font-size: 15px;
+}
+
+.action-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+
+.action-icon.profile {
+  background: rgba(64, 224, 208, 0.18);
+  color: #2bb6a6;
+}
+
+.action-icon.books {
+  background: rgba(41, 128, 185, 0.12);
+  color: #2c6faa;
+}
+
+.action-icon.loans {
+  background: rgba(52, 152, 219, 0.12);
+  color: #3b7dd8;
+}
+
+.table-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(159, 185, 200, 0.2);
+  box-shadow: 0 10px 18px rgba(17, 29, 47, 0.06);
+  overflow: hidden;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead {
+    background: #6aa9d0;
+    color: #ffffff;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    text-align: center;
+  }
+
+  tbody tr {
+    border-top: 1px solid #edf1f4;
+    font-size: 13px;
+    color: #4c5c6b;
+  }
+}
+
+.status.late {
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+.empty {
+  padding: 18px;
+  color: #6b7b8a;
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .books-grid,
+  .actions-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .user-dashboard {
+    padding: 90px 20px 24px;
+  }
+
+  .books-grid,
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+}

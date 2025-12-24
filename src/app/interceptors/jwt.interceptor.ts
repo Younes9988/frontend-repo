@@ -13,21 +13,27 @@ export class JwtInterceptor implements HttpInterceptor {
 
   constructor(private auth: AuthService) {}
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
 
-    const token = this.auth.token;
-
-    if (token) {
-      req = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-    }
-
+  // 🔓 DO NOT attach token to auth endpoints
+  if (
+    req.url.includes('/auth/login') ||
+    req.url.includes('/auth/register')
+  ) {
     return next.handle(req);
   }
+
+  const token = this.auth.token;
+
+  if (token) {
+    req = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  return next.handle(req);
+}
+
 }

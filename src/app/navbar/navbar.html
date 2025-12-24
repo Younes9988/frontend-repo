@@ -15,11 +15,11 @@
     </div>
 
     <!-- User Profile -->
-    <div class="profile">
+    <div class="profile" (click)="goToProfile()">
        <i class="fa-solid fa-circle-user user-icon"></i>
       <div class="profile-text">
-        <div class="name">John Smith</div>
-        <div class="email">johnsmith@gmail.com</div>
+        <div class="name">{{ userName }}</div>
+        <div class="email">{{ userEmail }}</div>
       </div>
     </div>
 

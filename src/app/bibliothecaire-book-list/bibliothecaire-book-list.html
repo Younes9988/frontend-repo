@@ -2,33 +2,33 @@
 
   <!-- Header -->
   <div class="books-header">
+    <div class="left-controls">
+      <!-- SEARCH -->
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="onSearchChange($event)"
+        />
+      </div>
+
+      <!-- FILTER -->
+      <select
+        class="filter-select"
+        [(ngModel)]="selectedCategory"
+        (ngModelChange)="onCategoryChange($event)"
+      >
+        <option *ngFor="let cat of categories" [value]="cat.value">
+          {{ cat.label }}
+        </option>
+      </select>
+    </div>
 
     <button class="add-book-btn" (click)="goToAddBook()">
       <i class="fa-solid fa-plus"></i> Add A Book
     </button>
-
-    <!-- SEARCH -->
-    <div class="search-box">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input
-        type="text"
-        placeholder="Search..."
-        [(ngModel)]="searchTerm"
-        (ngModelChange)="onSearchChange($event)"
-      />
-    </div>
-
-    <!-- FILTER -->
-   <select
-  class="filter-select"
-  [(ngModel)]="selectedCategory"
-  (ngModelChange)="onCategoryChange($event)"
->
-  <option *ngFor="let cat of categories" [value]="cat.value">
-    {{ cat.label }}
-  </option>
-</select>
-
   </div>
 
   <!-- GRID -->
@@ -38,7 +38,9 @@
       *ngFor="let livre of filteredLivres$ | async"
       (click)="goToDetails(livre.livreId)"
     >
-      <img [src]="'http://localhost:8760/' + livre.image" />
+      <div class="cover">
+        <img [src]="'http://localhost:8760/' + livre.image" [alt]="livre.titre" />
+      </div>
       <div class="book-info">
         <h4>{{ livre.titre }}</h4>
         <p>By {{ livre.auteur }}</p>

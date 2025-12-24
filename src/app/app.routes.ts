@@ -16,6 +16,10 @@ import { authGuard } from './guards/auth.guard';
 import { UserLayout } from './user-layout/user-layout';
 import { DetailBookUser } from './detail-book-user/detail-book-user';
 import { EmpruntUserList } from './emprunt-user-list/emprunt-user-list';
+import { UserHome } from './user-home/user-home';
+import { UserProfile } from './user-profile/user-profile';
+import { BibliothecaireHome } from './bibliothecaire-home/bibliothecaire-home';
+import { EmpruntDetail } from './emprunt-detail/emprunt-detail';
 export const routes: Routes = [
 
   // 🔹 Login (ONLY exact root)
@@ -27,6 +31,7 @@ export const routes: Routes = [
   component: BibliothecaireLayout,
   canActivate: [adminGuard],   // 🔐 HERE
   children: [
+    { path: 'admin-profile', component: UserProfile },
     { path: 'adminbooklist', component: BibliothecaireBookList },
     { path: 'add-book', component: AddBook },
     { path: 'book-details/:id', component: DetailBookBibliothecaire },
@@ -34,7 +39,9 @@ export const routes: Routes = [
     { path: 'user-details/:id', component: ReadersDetail },
     { path: 'add-user', component: AddReaders },
     { path: 'emprunt-list', component: EmpruntsList },
+    { path: 'emprunt-details/:id', component: EmpruntDetail },
     { path: 'add-emprunt', component: AddEmprunt },
+    { path: 'Bhome', component: BibliothecaireHome },
   ]
 },
 {
@@ -42,6 +49,8 @@ export const routes: Routes = [
   component: UserLayout,   // your user sidebar layout
   canActivateChild: [authGuard],
   children: [
+    { path: 'user-home', component: UserHome },
+    { path: 'user-profile', component: UserProfile },
     { path: 'userbooklist', component: UserBookList },
     { path: 'user-book-details/:id', component: DetailBookUser },
     {path:'user-emprunt-list',component:EmpruntUserList}

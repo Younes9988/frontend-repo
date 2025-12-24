@@ -33,6 +33,8 @@ export class AuthService {
     password: string;
     nom: string;
     prenom: string;
+    telephone: string;
+    adresse: string;
   }) {
     return this.http.post(`${this.API}/register`, data);
   }

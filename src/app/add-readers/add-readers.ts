@@ -39,7 +39,9 @@ export class AddReaders {
       email: this.form.email,
       password: this.form.motDePasse,
       nom: this.form.nom,
-      prenom: this.form.prenom
+      prenom: this.form.prenom,
+      telephone: this.form.telephone,
+      adresse: this.form.adresse
     }).subscribe({
       next: () => {
         this.router.navigate(['/users-list']);

@@ -1,0 +1,78 @@
+<section class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p class="welcome">Welcome back, John!</p>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-title">Available books</div>
+      <div class="stat-body">
+        <div class="stat-icon books">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div class="stat-value">{{ (availableBooks$ | async) ?? 0 }}</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-title">Registered readers</div>
+      <div class="stat-body">
+        <div class="stat-icon readers">
+          <i class="fa-solid fa-user-group"></i>
+        </div>
+        <div class="stat-value">{{ (readersCount$ | async) ?? 0 }}</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-title">Current loans</div>
+      <div class="stat-body">
+        <div class="stat-icon loans">
+          <i class="fa-solid fa-hand-holding"></i>
+        </div>
+        <div class="stat-value">{{ (currentLoans$ | async) ?? 0 }}</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-title">Late loans</div>
+      <div class="stat-body">
+        <div class="stat-icon late">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <div class="stat-value">{{ (lateLoans$ | async) ?? 0 }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h2>Quick Actions</h2>
+    <i class="fa-solid fa-rocket"></i>
+  </div>
+
+  <div class="actions-grid">
+    <a class="action-card" routerLink="/users-list">
+      <div class="action-icon readers">
+        <i class="fa-solid fa-user-group"></i>
+      </div>
+      <div class="action-text">Manage Readers</div>
+    </a>
+
+    <a class="action-card" routerLink="/adminbooklist">
+      <div class="action-icon books">
+        <i class="fa-solid fa-book-open"></i>
+      </div>
+      <div class="action-text">View Available Books</div>
+    </a>
+
+    <a class="action-card" routerLink="/emprunt-list">
+      <div class="action-icon loans">
+        <i class="fa-solid fa-rotate"></i>
+      </div>
+      <div class="action-text">Manage Loans</div>
+    </a>
+  </div>
+</section>

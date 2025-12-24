@@ -18,12 +18,17 @@ export class ReadersList implements OnInit {
 
   utilisateurs$!: Observable<Utilisateur[]>;
   filteredUtilisateurs$!: Observable<Utilisateur[]>;
+  pagedUtilisateurs$!: Observable<Utilisateur[]>;
+  totalPages$!: Observable<number>;
 
   searchTerm = '';
   selectedRole = 'ALL';
 
   private search$ = new BehaviorSubject<string>('');
   private role$ = new BehaviorSubject<string>('ALL');
+
+  currentPage$ = new BehaviorSubject<number>(1);
+  pageSize$ = new BehaviorSubject<number>(5);
 
   roles = [
     { value: 'ALL', label: 'All roles' },
@@ -53,15 +58,32 @@ export class ReadersList implements OnInit {
       )
     );
 
+    this.totalPages$ = combineLatest([this.filteredUtilisateurs$, this.pageSize$]).pipe(
+      map(([users, size]) => Math.ceil(users.length / size))
+    );
+
+    this.pagedUtilisateurs$ = combineLatest([
+      this.filteredUtilisateurs$,
+      this.currentPage$,
+      this.pageSize$
+    ]).pipe(
+      map(([users, page, size]) => {
+        const start = (page - 1) * size;
+        return users.slice(start, start + size);
+      })
+    );
+
     this.utilisateurService.fetchUtilisateurs();
   }
 
   onSearchChange(value: string) {
     this.search$.next(value);
+    this.currentPage$.next(1);
   }
 
   onRoleChange(value: string) {
     this.role$.next(value);
+    this.currentPage$.next(1);
   }
 
   goToAddUser() {
@@ -70,6 +92,29 @@ export class ReadersList implements OnInit {
 
   goToDetails(id: number) {
     this.router.navigate(['/user-details', id]);
+  }
+
+  prevPage() {
+    const current = this.currentPage$.value;
+    if (current > 1) {
+      this.currentPage$.next(current - 1);
+    }
+  }
+
+  nextPage(totalPages: number) {
+    const current = this.currentPage$.value;
+    if (current < totalPages) {
+      this.currentPage$.next(current + 1);
+    }
+  }
+
+  goToPage(page: number) {
+    this.currentPage$.next(page);
+  }
+
+  changePageSize(size: number) {
+    this.pageSize$.next(+size);
+    this.currentPage$.next(1);
   }
 
   private matchesSearch(u: Utilisateur, search: string): boolean {
