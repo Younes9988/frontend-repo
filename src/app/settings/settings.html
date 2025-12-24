@@ -1,0 +1,59 @@
+<div class="settings-page">
+  <div class="header">
+    <div class="title-block">
+      <h2>
+        <i class="fa-solid fa-gear"></i>
+        Settings
+      </h2>
+      <p class="subtitle">Personalize your experience.</p>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <div class="icon-circle">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div>
+          <h3>Profile</h3>
+          <p>Review your personal information and security.</p>
+        </div>
+      </div>
+      <a class="action-btn" [routerLink]="profileRoute">
+        <i class="fa-solid fa-arrow-right"></i>
+        Open Profile
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="icon-circle">
+          <i class="fa-solid fa-circle-half-stroke"></i>
+        </div>
+        <div>
+          <h3>Appearance</h3>
+          <p>Switch between light and dark mode.</p>
+        </div>
+      </div>
+      <div class="theme-toggle" role="radiogroup" aria-label="Theme">
+        <button
+          type="button"
+          class="theme-option"
+          [class.active]="theme === 'light'"
+          (click)="setTheme('light')">
+          <i class="fa-solid fa-sun"></i>
+          Light
+        </button>
+        <button
+          type="button"
+          class="theme-option"
+          [class.active]="theme === 'dark'"
+          (click)="setTheme('dark')">
+          <i class="fa-solid fa-moon"></i>
+          Dark
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

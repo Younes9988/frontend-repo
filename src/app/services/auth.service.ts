@@ -27,6 +27,14 @@ export class AuthService {
     );
   }
 
+  changePassword(data: {
+    email: string;
+    currentPassword: string;
+    newPassword: string;
+  }) {
+    return this.http.post(`${this.API}/change-password`, data);
+  }
+
   // ✅ THIS METHOD MUST EXIST
   register(data: {
     email: string;

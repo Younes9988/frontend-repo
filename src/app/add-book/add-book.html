@@ -1,27 +1,56 @@
 
         <!-- Books Page Layout -->
         <div class="books-page">
+            <div class="toast-stack" aria-live="polite" aria-atomic="true">
+                <div
+                    *ngIf="toast.visible"
+                    class="toast"
+                    [class.success]="toast.type === 'success'"
+                    [class.error]="toast.type === 'error'"
+                    [class.warning]="toast.type === 'warning'">
+                    {{ toast.message }}
+                </div>
+            </div>
             <div class="add-title-container">
-                <h2>Add a new Title</h2>
+                <div class="page-header">
+                    <h2>
+                        <i class="fa-solid fa-book-medical"></i>
+                        Add a new Title
+                    </h2>
+                    <p class="subtitle">Create a new book entry with metadata and cover.</p>
+                </div>
                 <form class="add-book-form" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
 
                     <!-- LEFT COLUMN -->
                     <div class="form-left">
 
-                        <label>Title*</label>
+                        <label class="field-label">
+                            <i class="fa-solid fa-book-open"></i>
+                            Title*
+                        </label>
                         <input type="text" formControlName="titre" placeholder="Enter Title">
 
-                        <label>Author*</label>
+                        <label class="field-label">
+                            <i class="fa-solid fa-pen-nib"></i>
+                            Author*
+                        </label>
                         <input type="text" formControlName="auteur" placeholder="Enter The Author's Name">
 
-                        <label>ISBN*</label>
+                        <label class="field-label">
+                            <i class="fa-solid fa-barcode"></i>
+                            ISBN*
+                        </label>
                         <input type="text" formControlName="isbn" placeholder="Enter ISBN">
 
-                        <label>Book Cover Image*</label>
+                        <label class="field-label">
+                            <i class="fa-solid fa-image"></i>
+                            Book Cover Image*
+                        </label>
                         <div class="upload-box" (click)="fileInput.click()">
                             <input type="file" hidden #fileInput (change)="onFileSelected($event)">
 
                             <ng-container *ngIf="!imagePreview">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
                                 <p>Drag and drop files here, or click to browse</p>
                                 <button type="button">Browse Files</button>
                             </ng-container>
@@ -35,19 +64,31 @@
                     <!-- RIGHT COLUMN -->
                     <div class="form-right">
 
-                        <label>Category*</label>
+                        <label class="field-label">
+                            <i class="fa-solid fa-layer-group"></i>
+                            Category*
+                        </label>
                         <select formControlName="category">
                             <option value="">Select</option>
                             <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
                         </select>
 
-                        <label>Number Of Copies*</label>
+                        <label class="field-label">
+                            <i class="fa-solid fa-copy"></i>
+                            Number Of Copies*
+                        </label>
                         <input type="number" formControlName="nombreCopies">
 
-                        <label>Acquisition Date*</label>
+                        <label class="field-label">
+                            <i class="fa-solid fa-calendar-day"></i>
+                            Acquisition Date*
+                        </label>
                         <input type="date" formControlName="dateAcquisition">
 
-                        <label>Description*</label>
+                        <label class="field-label">
+                            <i class="fa-solid fa-align-left"></i>
+                            Description*
+                        </label>
                         <textarea formControlName="description"></textarea>
 
                     </div>
@@ -56,8 +97,14 @@
 
                 <!-- BUTTONS -->
                 <div class="actions">
-                    <button class="cancel-btn" (click)="cancel()">Cancel</button>
-                    <button class="add-btn" (click)="onSubmit()">Add The Book</button>
+                    <button class="cancel-btn" (click)="cancel()">
+                        <i class="fa-solid fa-xmark"></i>
+                        Cancel
+                    </button>
+                    <button class="add-btn" (click)="onSubmit()">
+                        <i class="fa-solid fa-plus"></i>
+                        Add The Book
+                    </button>
                 </div>
             </div>
         </div>

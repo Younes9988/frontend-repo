@@ -20,6 +20,7 @@ import { UserHome } from './user-home/user-home';
 import { UserProfile } from './user-profile/user-profile';
 import { BibliothecaireHome } from './bibliothecaire-home/bibliothecaire-home';
 import { EmpruntDetail } from './emprunt-detail/emprunt-detail';
+import { Settings } from './settings/settings';
 export const routes: Routes = [
 
   // 🔹 Login (ONLY exact root)
@@ -32,6 +33,7 @@ export const routes: Routes = [
   canActivate: [adminGuard],   // 🔐 HERE
   children: [
     { path: 'admin-profile', component: UserProfile },
+    { path: 'admin-settings', component: Settings },
     { path: 'adminbooklist', component: BibliothecaireBookList },
     { path: 'add-book', component: AddBook },
     { path: 'book-details/:id', component: DetailBookBibliothecaire },
@@ -51,6 +53,7 @@ export const routes: Routes = [
   children: [
     { path: 'user-home', component: UserHome },
     { path: 'user-profile', component: UserProfile },
+    { path: 'user-settings', component: Settings },
     { path: 'userbooklist', component: UserBookList },
     { path: 'user-book-details/:id', component: DetailBookUser },
     {path:'user-emprunt-list',component:EmpruntUserList}

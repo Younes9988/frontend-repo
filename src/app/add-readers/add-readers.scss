@@ -3,21 +3,40 @@
 .users-page {
   padding: 20px 40px;
   padding-top: 90px;           /* space under navbar */
+  background: #f6f9fc;
+  min-height: 100vh;
 }
-.add-user-container {
-  padding: 20px 40px;
+
+.page-header {
+  margin-bottom: 20px;
 
   h2 {
     font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 25px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 6px;
+
+    i {
+      color: #387dad;
+      font-size: 20px;
+    }
   }
 }
 
+.subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #6a7b8a;
+}
+
 .add-user-form {
-  background: #f3f9fc;
-  padding: 25px;
-  border-radius: 10px;
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid #d8e6ef;
+  box-shadow: 0 12px 22px rgba(14, 31, 44, 0.08);
 
   .row {
     display: flex;
@@ -37,10 +56,23 @@
 
     input, select {
       padding: 12px 15px;
-      border-radius: 25px;
-      border: 1px solid #bcd7e3;
-      background: #fff;
+      border-radius: 14px;
+      border: 1px solid #cfe0ea;
+      background: #f7fbfd;
     }
+  }
+}
+
+.field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #6a7b8a;
+
+  i {
+    color: #9bb2c1;
+    font-size: 12px;
   }
 }
 
@@ -56,6 +88,9 @@
     border-radius: 25px;
     border: none;
     color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .add-btn {
@@ -64,5 +99,23 @@
     border-radius: 25px;
     border: none;
     color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 900px) {
+  .users-page {
+    padding: 20px;
+    padding-top: 80px;
+  }
+
+  .add-user-form .row {
+    flex-direction: column;
+  }
+
+  .add-user-form .field {
+    width: 100%;
   }
 }

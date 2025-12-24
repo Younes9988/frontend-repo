@@ -1,45 +1,153 @@
 <div class="profile-page" *ngIf="!loading && user">
   <div class="header">
-    <h2>My Profile</h2>
+    <div class="title-block">
+      <h2>
+        <i class="fa-solid fa-user"></i>
+        My Profile
+      </h2>
+      <p class="subtitle">View your account details and security settings.</p>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <div class="avatar">
+      {{ user.prenom?.charAt(0) }}{{ user.nom?.charAt(0) }}
+    </div>
+    <div class="profile-info">
+      <div class="name">{{ user.prenom }} {{ user.nom }}</div>
+      <div class="email">
+        <i class="fa-solid fa-envelope"></i>
+        {{ user.email }}
+      </div>
+      <div class="role">
+        <i class="fa-solid fa-user-shield"></i>
+        {{ user.role }}
+      </div>
+    </div>
+    <div class="status-pill" [class.active]="user.actif" [class.inactive]="!user.actif">
+      <i class="fa-solid" [class.fa-circle-check]="user.actif" [class.fa-circle-xmark]="!user.actif"></i>
+      {{ user.actif ? 'Active' : 'Inactive' }}
+    </div>
   </div>
 
   <div class="details-box">
     <div class="info">
       <div class="row">
         <div class="field">
-          <label>First Name</label>
+          <label>
+            <i class="fa-solid fa-id-card"></i>
+            First Name
+          </label>
           <input type="text" [value]="user.prenom" readonly />
         </div>
 
         <div class="field">
-          <label>Last Name</label>
+          <label>
+            <i class="fa-solid fa-id-card-clip"></i>
+            Last Name
+          </label>
           <input type="text" [value]="user.nom" readonly />
         </div>
       </div>
 
       <div class="row">
         <div class="field">
-          <label>Email</label>
+          <label>
+            <i class="fa-solid fa-envelope"></i>
+            Email
+          </label>
           <input type="text" [value]="user.email" readonly />
         </div>
 
         <div class="field">
-          <label>Phone</label>
+          <label>
+            <i class="fa-solid fa-phone"></i>
+            Phone
+          </label>
           <input type="text" [value]="user.telephone" readonly />
         </div>
       </div>
 
       <div class="row">
         <div class="field">
-          <label>Role</label>
+          <label>
+            <i class="fa-solid fa-user-shield"></i>
+            Role
+          </label>
           <input type="text" [value]="user.role" readonly />
         </div>
 
         <div class="field">
-          <label>Status</label>
+          <label>
+            <i class="fa-solid fa-signal"></i>
+            Status
+          </label>
           <input type="text" [value]="user.actif ? 'Active' : 'Inactive'" readonly />
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="security-card">
+    <div class="security-header">
+      <h3>
+        <i class="fa-solid fa-lock"></i>
+        Change Password
+      </h3>
+      <p>Use a strong password you don't use elsewhere.</p>
+    </div>
+
+    <form class="security-form" (ngSubmit)="changePassword()">
+      <div class="row">
+        <div class="field">
+          <label>
+            <i class="fa-solid fa-key"></i>
+            Current Password
+          </label>
+          <input
+            type="password"
+            [(ngModel)]="currentPassword"
+            name="currentPassword"
+            placeholder="Enter current password"
+          />
+        </div>
+
+        <div class="field">
+          <label>
+            <i class="fa-solid fa-lock"></i>
+            New Password
+          </label>
+          <input
+            type="password"
+            [(ngModel)]="newPassword"
+            name="newPassword"
+            placeholder="Enter new password"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>
+            <i class="fa-solid fa-lock"></i>
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm new password"
+          />
+        </div>
+      </div>
+
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+
+      <button class="save-btn" type="submit" [disabled]="saving">
+        <i class="fa-solid fa-circle-check"></i>
+        {{ saving ? 'Updating...' : 'Update Password' }}
+      </button>
+    </form>
   </div>
 </div>

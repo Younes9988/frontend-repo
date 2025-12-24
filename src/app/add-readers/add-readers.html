@@ -1,40 +1,64 @@
 <div class="users-page">
-  <h2>Add New Reader</h2>
+  <div class="page-header">
+    <h2>
+      <i class="fa-solid fa-user-plus"></i>
+      Add New Reader
+    </h2>
+    <p class="subtitle">Create a new reader account with contact details.</p>
+  </div>
 
   <form class="add-user-form" (ngSubmit)="submit()">
 
     <div class="row">
       <div class="field">
-        <label>First Name*</label>
+        <label class="field-label">
+          <i class="fa-solid fa-id-card"></i>
+          First Name*
+        </label>
         <input type="text" required [(ngModel)]="form.prenom" name="prenom">
       </div>
 
       <div class="field">
-        <label>Last Name*</label>
+        <label class="field-label">
+          <i class="fa-solid fa-id-card-clip"></i>
+          Last Name*
+        </label>
         <input type="text" required [(ngModel)]="form.nom" name="nom">
       </div>
     </div>
 
     <div class="row">
       <div class="field">
-        <label>Email*</label>
+        <label class="field-label">
+          <i class="fa-solid fa-envelope"></i>
+          Email*
+        </label>
         <input type="email" required [(ngModel)]="form.email" name="email">
       </div>
 
       <div class="field">
-        <label>Phone*</label>
+        <label class="field-label">
+          <i class="fa-solid fa-phone"></i>
+          Phone*
+        </label>
         <input type="text" required [(ngModel)]="form.telephone" name="telephone">
       </div>
     </div>
 
     <div class="row">
       <div class="field">
-        <label>Address*</label>
+        <label class="field-label">
+          <i class="fa-solid fa-location-dot"></i>
+          Address*
+        </label>
         <input type="text" required [(ngModel)]="form.adresse" name="adresse">
       </div>
 
       <div class="field">
-        <label>Password*</label>
+        <label class="field-label">
+          <i class="fa-solid fa-lock"></i>
+          Password*
+        </label>
         <input type="password" required [(ngModel)]="form.motDePasse" name="motDePasse">
       </div>
     </div>
@@ -42,8 +66,12 @@
     <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
     <div class="btns">
-      <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+      <button type="button" class="cancel-btn" (click)="cancel()">
+        <i class="fa-solid fa-xmark"></i>
+        Cancel
+      </button>
       <button type="submit" class="add-btn" [disabled]="saving">
+        <i class="fa-solid fa-plus"></i>
         {{ saving ? 'Saving...' : 'Add User' }}
       </button>
     </div>

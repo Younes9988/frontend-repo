@@ -1,83 +1,143 @@
 <div class="emprunt-detail-page" *ngIf="!loading && emprunt">
   <div class="header">
-    <h2>Emprunt Details</h2>
+    <h2>
+      <i class="fa-solid fa-file-circle-check"></i>
+      Loan Details
+    </h2>
   </div>
 
   <div class="details-grid">
     <div class="card">
-      <h3>Emprunt</h3>
+      <h3>
+        <i class="fa-solid fa-calendar-check"></i>
+        Loan
+      </h3>
       <div class="field">
-        <span class="label">Status</span>
-        <span class="value">{{ emprunt.statutEmprunt }}</span>
+        <span class="label">
+          <i class="fa-solid fa-signal"></i>
+          Status
+        </span>
+        <span class="value status-pill" [ngClass]="{
+          'status-in-progress': emprunt.statutEmprunt === 'EN_COURS',
+          'status-returned': emprunt.statutEmprunt === 'RETOURNE',
+          'status-late': emprunt.statutEmprunt === 'EN_RETARD'
+        }">
+          {{ emprunt.statutEmprunt }}
+        </span>
       </div>
       <div class="field">
-        <span class="label">Loan Date</span>
+        <span class="label">
+          <i class="fa-solid fa-clock"></i>
+          Loan Date
+        </span>
         <span class="value">{{ emprunt.dateEmprunt | date:'dd/MM/yyyy' }}</span>
       </div>
       <div class="field">
-        <span class="label">Return Due</span>
+        <span class="label">
+          <i class="fa-solid fa-calendar-days"></i>
+          Due Date
+        </span>
         <span class="value">{{ emprunt.dateRetourPrevue | date:'dd/MM/yyyy' }}</span>
       </div>
       <div class="field">
-        <span class="label">Actual Return</span>
+        <span class="label">
+          <i class="fa-solid fa-circle-check"></i>
+          Returned On
+        </span>
         <span class="value">{{ emprunt.dateRetourEffective ? (emprunt.dateRetourEffective | date:'dd/MM/yyyy') : '-' }}</span>
       </div>
       <div class="field">
-        <span class="label">Penalty</span>
+        <span class="label">
+          <i class="fa-solid fa-coins"></i>
+          Penalty
+        </span>
         <span class="value">{{ emprunt.penalite }} DH</span>
       </div>
     </div>
 
     <div class="card">
-      <h3>User</h3>
+      <h3>
+        <i class="fa-solid fa-user"></i>
+        User
+      </h3>
       <ng-container *ngIf="user; else userMissing">
         <div class="field">
-          <span class="label">Name</span>
+          <span class="label">
+            <i class="fa-solid fa-id-card"></i>
+            Name
+          </span>
           <span class="value">{{ user.prenom }} {{ user.nom }}</span>
         </div>
         <div class="field">
-          <span class="label">Email</span>
+          <span class="label">
+            <i class="fa-solid fa-envelope"></i>
+            Email
+          </span>
           <span class="value">{{ user.email }}</span>
         </div>
         <div class="field">
-          <span class="label">Phone</span>
+          <span class="label">
+            <i class="fa-solid fa-phone"></i>
+            Phone
+          </span>
           <span class="value">{{ user.telephone }}</span>
         </div>
         <div class="field">
-          <span class="label">Role</span>
+          <span class="label">
+            <i class="fa-solid fa-user-shield"></i>
+            Role
+          </span>
           <span class="value">{{ user.role }}</span>
         </div>
       </ng-container>
       <ng-template #userMissing>
         <div class="field">
-          <span class="label">Status</span>
+          <span class="label">
+            <i class="fa-solid fa-circle-info"></i>
+            Status
+          </span>
           <span class="value">User not found</span>
         </div>
       </ng-template>
     </div>
 
     <div class="card">
-      <h3>Book</h3>
+      <h3>
+        <i class="fa-solid fa-book"></i>
+        Book
+      </h3>
       <ng-container *ngIf="book; else bookMissing">
         <div class="book-cover">
           <img [src]="'http://localhost:8760/' + book.image" [alt]="book.titre" />
         </div>
         <div class="field">
-          <span class="label">Title</span>
+          <span class="label">
+            <i class="fa-solid fa-book-open"></i>
+            Title
+          </span>
           <span class="value">{{ book.titre }}</span>
         </div>
         <div class="field">
-          <span class="label">Author</span>
+          <span class="label">
+            <i class="fa-solid fa-pen-nib"></i>
+            Author
+          </span>
           <span class="value">{{ book.auteur }}</span>
         </div>
         <div class="field">
-          <span class="label">Category</span>
+          <span class="label">
+            <i class="fa-solid fa-layer-group"></i>
+            Category
+          </span>
           <span class="value">{{ book.category }}</span>
         </div>
       </ng-container>
       <ng-template #bookMissing>
         <div class="field">
-          <span class="label">Status</span>
+          <span class="label">
+            <i class="fa-solid fa-circle-info"></i>
+            Status
+          </span>
           <span class="value">Book not found</span>
         </div>
       </ng-template>

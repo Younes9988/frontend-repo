@@ -1,13 +1,27 @@
 <div class="users-page">
-  <h2>Add New Emprunt</h2>
+  <div class="page-header">
+    <div class="title-block">
+      <p class="eyebrow">Emprunts</p>
+      <h2>Create a new loan</h2>
+      <p class="subtitle">Link a reader with a book in two quick steps.</p>
+    </div>
+    <div class="header-card">
+      <div class="header-card-title">Loan Wizard</div>
+      <div class="header-card-subtitle">Pick a book and a reader</div>
+    </div>
+  </div>
 
   <form class="add-user-form" (ngSubmit)="submit()">
 
     <!-- WRAP BOTH ROWS IN A CONTAINER -->
     <div class="form-row-wrapper">
-      
+
       <!-- BOOK SELECTION -->
-      <div class="row">
+      <div class="row field-card">
+        <div class="field-header">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Book</span>
+        </div>
         <label>Book *</label>
 
         <input
@@ -23,18 +37,22 @@
           <li
             *ngFor="let l of filteredLivres$ | async"
             (click)="selectedLivre = l">
-            {{ l.titre }} — {{ l.auteur }}
+            {{ l.titre }} - {{ l.auteur }}
           </li>
         </ul>
 
         <div class="chip" *ngIf="selectedLivre">
-  {{ selectedLivre.titre }}
-  <span (click)="clearSelectedLivre()">×</span>
-</div>
+          {{ selectedLivre.titre }}
+          <span (click)="clearSelectedLivre()">&times;</span>
+        </div>
       </div>
 
       <!-- USER SELECTION -->
-      <div class="row">
+      <div class="row field-card">
+        <div class="field-header">
+          <i class="fa-solid fa-user"></i>
+          <span>User</span>
+        </div>
         <label>User *</label>
 
         <input
@@ -54,14 +72,29 @@
           </li>
         </ul>
 
-      <div class="chip user" *ngIf="selectedUtilisateur">
-  {{ selectedUtilisateur.nom }} {{ selectedUtilisateur.prenom }}
-  <span (click)="clearSelectedUtilisateur()">×</span>
-</div>
+        <div class="chip user" *ngIf="selectedUtilisateur">
+          {{ selectedUtilisateur.nom }} {{ selectedUtilisateur.prenom }}
+          <span (click)="clearSelectedUtilisateur()">&times;</span>
+        </div>
       </div>
 
     </div>
     <!-- END WRAPPER -->
+
+    <div class="selection-preview" *ngIf="selectedLivre || selectedUtilisateur">
+      <div class="preview-item" [class.active]="selectedLivre">
+        <span class="preview-label">Book</span>
+        <span class="preview-value">
+          {{ selectedLivre ? selectedLivre.titre : 'No book selected' }}
+        </span>
+      </div>
+      <div class="preview-item" [class.active]="selectedUtilisateur">
+        <span class="preview-label">User</span>
+        <span class="preview-value">
+          {{ selectedUtilisateur ? (selectedUtilisateur.nom + ' ' + selectedUtilisateur.prenom) : 'No user selected' }}
+        </span>
+      </div>
+    </div>
 
     <!-- ERROR MESSAGE -->
     <p class="error" *ngIf="errorMessage">

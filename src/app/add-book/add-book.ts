@@ -21,6 +21,12 @@ export class AddBook {
 
   bookForm!: FormGroup;
   selectedFile!: File;
+  private toastTimeoutId: ReturnType<typeof setTimeout> | null = null;
+  toast: { message: string; type: 'success' | 'error' | 'warning'; visible: boolean } = {
+    message: '',
+    type: 'success',
+    visible: false
+  };
 
   categories = [
     'LITTERATURE_ET_FICTION',
@@ -68,7 +74,7 @@ export class AddBook {
 
   onSubmit() {
     if (this.bookForm.invalid || !this.selectedFile) {
-      alert('Please fill all required fields and select an image.');
+      this.showToast('Please fill all required fields and select an image.', 'warning');
       return;
     }
 
@@ -80,16 +86,30 @@ export class AddBook {
 
     this.livreService.addLivre(formData).subscribe({
       next: () => {
-        alert('Book added successfully');
-        this.router.navigate(['/adminbooklist']);
+        this.showToast('Book added successfully', 'success');
+        setTimeout(() => {
+          this.router.navigate(['/adminbooklist']);
+        }, 800);
       },
       error: (err) => {
         console.error(err);
-        alert(err.error?.message || 'Error while adding book');
+        this.showToast(err.error?.message || 'Error while adding book', 'error');
       }
     });
   }
   cancel() {
     this.router.navigate(['/adminbooklist']);
+  }
+
+  private showToast(message: string, type: 'success' | 'error' | 'warning') {
+    if (this.toastTimeoutId) {
+      clearTimeout(this.toastTimeoutId);
+    }
+
+    this.toast = { message, type, visible: true };
+    this.toastTimeoutId = setTimeout(() => {
+      this.toast = { ...this.toast, visible: false };
+      this.toastTimeoutId = null;
+    }, 3000);
   }
 }

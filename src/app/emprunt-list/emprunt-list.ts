@@ -4,26 +4,36 @@ import { FormsModule } from '@angular/forms';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 import { EmpruntService } from '../services/emprunt.service';
+import { LivreService } from '../services/livre.service';
+import { UtilisateurService } from '../services/utilisateur.service';
 import { Emprunt } from '../models/emprunt.model';
+import { Livre } from '../models/livre.model';
+import { Utilisateur } from '../models/utilisateur.model';
 import { Router, RouterModule } from '@angular/router';
+
+interface EmpruntView extends Emprunt {
+  bookTitle: string;
+  userName: string;
+  statusLabel: string;
+  statusClass: string;
+}
 
 @Component({
   selector: 'app-emprunts-list',
   standalone: true,
-  imports: [   RouterModule ,CommonModule, FormsModule],
+  imports: [RouterModule, CommonModule, FormsModule],
   templateUrl: './emprunt-list.html',
   styleUrls: ['./emprunt-list.scss']
 })
 export class EmpruntsList implements OnInit {
-
   emprunts$!: Observable<Emprunt[]>;
-  filteredEmprunts$!: Observable<Emprunt[]>;
+  livres$!: Observable<Livre[]>;
+  utilisateurs$!: Observable<Utilisateur[]>;
+  pagedEmprunts$!: Observable<EmpruntView[]>;
+  totalPages$!: Observable<number>;
 
-  //pagination
   currentPage$ = new BehaviorSubject<number>(1);
   pageSize$ = new BehaviorSubject<number>(5);
-  totalPages$!: Observable<number>;
-  pagedEmprunts$!: Observable<Emprunt[]>;
 
   searchTerm = '';
   selectedStatut = 'ALL';
@@ -33,53 +43,86 @@ export class EmpruntsList implements OnInit {
 
   statuts = [
     { value: 'ALL', label: 'All' },
-    { value: 'EN_COURS', label: 'En cours' },
-    { value: 'RETOURNE', label: 'Retourné' },
-    { value: 'EN_RETARD', label: 'En retard' }
+    { value: 'EN_COURS', label: 'In progress' },
+    { value: 'RETOURNE', label: 'Returned' },
+    { value: 'EN_RETARD', label: 'Late' }
   ];
+
+  private statusMeta: Record<
+    Emprunt['statutEmprunt'],
+    { label: string; className: string }
+  > = {
+    EN_COURS: { label: 'In progress', className: 'status-in-progress' },
+    RETOURNE: { label: 'Returned', className: 'status-returned' },
+    EN_RETARD: { label: 'Late', className: 'status-late' }
+  };
 
   constructor(
     private empruntService: EmpruntService,
+    private livreService: LivreService,
+    private utilisateurService: UtilisateurService,
     private router: Router
   ) {}
 
-ngOnInit(): void {
-  this.emprunts$ = this.empruntService.emprunts$;
+  ngOnInit(): void {
+    this.emprunts$ = this.empruntService.emprunts$;
+    this.livres$ = this.livreService.livres$;
+    this.utilisateurs$ = this.utilisateurService.utilisateurs$;
 
-  // 1️⃣ FILTERED STREAM (search + statut)
-  const filtered$ = combineLatest([
-    this.emprunts$,
-    this.search$,
-    this.statut$
-  ]).pipe(
-    map(([emprunts, search, statut]) =>
-      emprunts.filter(e =>
-        this.matchesSearch(e, search) &&
-        this.matchesStatut(e, statut)
-      )
-    )
-  );
+    const filtered$ = combineLatest([
+      this.emprunts$,
+      this.livres$,
+      this.utilisateurs$,
+      this.search$,
+      this.statut$
+    ]).pipe(
+      map(([emprunts, livres, utilisateurs, search, statut]) => {
+        const term = search.trim().toLowerCase();
+        const livreMap = new Map(livres.map(l => [l.livreId, l]));
+        const userMap = new Map(utilisateurs.map(u => [u.id, u]));
 
-  // 2️⃣ TOTAL PAGES
-  this.totalPages$ = combineLatest([filtered$, this.pageSize$]).pipe(
-    map(([emprunts, size]) => Math.ceil(emprunts.length / size))
-  );
+        return emprunts
+          .map((e): EmpruntView => {
+            const livre = livreMap.get(e.livreId);
+            const user = userMap.get(e.lecteurId);
+            const statusInfo = this.statusMeta[e.statutEmprunt];
 
-  // 3️⃣ PAGINATED DATA
-  this.pagedEmprunts$ = combineLatest([
-    filtered$,
-    this.currentPage$,
-    this.pageSize$
-  ]).pipe(
-    map(([emprunts, page, size]) => {
-      const start = (page - 1) * size;
-      return emprunts.slice(start, start + size);
-    })
-  );
+            return {
+              ...e,
+              bookTitle: livre?.titre ?? `Book #${e.livreId}`,
+              userName: user ? `${user.nom} ${user.prenom}` : `User #${e.lecteurId}`,
+              statusLabel: statusInfo.label,
+              statusClass: statusInfo.className
+            };
+          })
+          .filter(e =>
+            (statut === 'ALL' || e.statutEmprunt === statut) &&
+            (!term ||
+              e.bookTitle.toLowerCase().includes(term) ||
+              e.userName.toLowerCase().includes(term))
+          );
+      })
+    );
 
-  this.empruntService.fetchEmprunts();
-}
+    this.totalPages$ = combineLatest([filtered$, this.pageSize$]).pipe(
+      map(([emprunts, size]) => Math.ceil(emprunts.length / size))
+    );
 
+    this.pagedEmprunts$ = combineLatest([
+      filtered$,
+      this.currentPage$,
+      this.pageSize$
+    ]).pipe(
+      map(([emprunts, page, size]) => {
+        const start = (page - 1) * size;
+        return emprunts.slice(start, start + size);
+      })
+    );
+
+    this.empruntService.fetchEmprunts();
+    this.livreService.fetchLivres();
+    this.utilisateurService.fetchUtilisateurs();
+  }
 
   onSearchChange(v: string) {
     this.search$.next(v);
@@ -90,23 +133,20 @@ ngOnInit(): void {
   }
 
   retourner(emprunt: Emprunt) {
-    this.empruntService.retournerEmprunt(emprunt.id)
+    this.empruntService
+      .retournerEmprunt(emprunt.id)
       .subscribe(() => this.empruntService.fetchEmprunts());
   }
 
   goToDetails(emprunt: Emprunt) {
-    this.router.navigate(
-      ['/emprunt-details', emprunt.id],
-      {
-        queryParams: {
-          livreId: emprunt.livreId,
-          lecteurId: emprunt.lecteurId
-        }
+    this.router.navigate(['/emprunt-details', emprunt.id], {
+      queryParams: {
+        livreId: emprunt.livreId,
+        lecteurId: emprunt.lecteurId
       }
-    );
+    });
   }
-  //pagination methodes
-    // ⬅ Previous page
+
   prevPage() {
     const current = this.currentPage$.value;
     if (current > 1) {
@@ -114,7 +154,6 @@ ngOnInit(): void {
     }
   }
 
-  // ➡ Next page
   nextPage(totalPages: number) {
     const current = this.currentPage$.value;
     if (current < totalPages) {
@@ -122,27 +161,12 @@ ngOnInit(): void {
     }
   }
 
-  // 🔢 Go to specific page
   goToPage(page: number) {
     this.currentPage$.next(page);
   }
 
-  // 📏 Change page size
   changePageSize(size: number) {
     this.pageSize$.next(+size);
-    this.currentPage$.next(1); // reset to first page
-  }
-
-
-  private matchesSearch(e: Emprunt, s: string) {
-    if (!s) return true;
-    return (
-      e.lecteurId.toString().includes(s) ||
-      e.livreId.toString().includes(s)
-    );
-  }
-
-  private matchesStatut(e: Emprunt, statut: string) {
-    return statut === 'ALL' || e.statutEmprunt === statut;
+    this.currentPage$.next(1);
   }
 }

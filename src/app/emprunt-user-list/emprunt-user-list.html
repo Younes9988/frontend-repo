@@ -10,12 +10,12 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <input
           type="text"
-          placeholder="Search by book id"
+          placeholder="Search by book or user..."
           (input)="search$.next($any($event.target).value)"
         />
       </div>
 
-      <!-- Statut filter -->
+      <!-- Status filter -->
       <select
         class="filter-select"
         (change)="statut$.next($any($event.target).value)"
@@ -31,17 +31,19 @@
   <table class="custom-table">
     <thead>
       <tr>
-        <th>Livre</th>
-        <th>Date Emprunt</th>
-        <th>Retour prévu</th>
-        <th>Temps restant</th>
-        <th>Statut</th>
+        <th>Book</th>
+        <th>User</th>
+        <th>Borrowed On</th>
+        <th>Due Date</th>
+        <th>Time Left</th>
+        <th>Status</th>
       </tr>
     </thead>
 
     <tbody>
       <tr *ngFor="let e of pagedEmprunts$ | async">
-        <td>{{ e.livreId }}</td>
+        <td>{{ e.bookTitle }}</td>
+        <td>{{ e.userName }}</td>
         <td>{{ e.dateEmprunt | date }}</td>
         <td>{{ e.dateRetourPrevue | date }}</td>
         <td>
@@ -52,7 +54,11 @@
             {{ -daysLeft(e) }} days late
           </span>
         </td>
-        <td>{{ e.statutEmprunt }}</td>
+        <td>
+          <span class="status-pill" [ngClass]="e.statusClass">
+            {{ e.statusLabel }}
+          </span>
+        </td>
       </tr>
     </tbody>
   </table>

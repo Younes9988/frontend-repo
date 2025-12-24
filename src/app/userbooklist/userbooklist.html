@@ -34,7 +34,9 @@
       *ngFor="let livre of filteredLivres$ | async"
       (click)="goToDetails(livre.livreId)"
     >
-      <img [src]="'http://localhost:8760/' + livre.image" />
+      <div class="cover">
+        <img [src]="'http://localhost:8760/' + livre.image" [alt]="livre.titre" />
+      </div>
       <div class="book-info">
         <h4>{{ livre.titre }}</h4>
         <p>By {{ livre.auteur }}</p>

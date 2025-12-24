@@ -113,15 +113,30 @@
   }
 }
 
-/* ACTIVE / INACTIVE STATUS */
-.active {
-  color: green;
-  font-weight: bold;
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
-.inactive {
-  color: red;
-  font-weight: bold;
+.status-in-progress {
+  background: rgba(56, 125, 173, 0.16);
+  color: #1f5f89;
+}
+
+.status-returned {
+  background: rgba(34, 139, 84, 0.16);
+  color: #1e7a4a;
+}
+
+.status-late {
+  background: rgba(193, 43, 43, 0.16);
+  color: #c12b2b;
 }
 
 .details-btn {
